@@ -6,9 +6,9 @@ import os
 import io
 
 from distutils import spawn
-from external.six import text_type, PY2, PY3
+from external.six import (text_type, PY2, PY3)
 
-SUPPORTED_PLATFORMS = ['Linux']
+SUPPORTED_PLATFORMS = ['Linux', 'FreeBSD']
 
 PURGE_UNDEFINED = False  # Purge any users that fall between UID_MIN and UID_MAX that are not defined
 
