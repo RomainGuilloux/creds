@@ -11,8 +11,8 @@ python:
   - "pypy3"
   - "nightly"
 install:
-  - pip install tox-travis
   - pip install coveralls
+  - pip install tox-travis
 script:
   - tox
 after_success:
