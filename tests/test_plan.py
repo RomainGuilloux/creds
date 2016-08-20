@@ -37,6 +37,8 @@ def test_create_and_execute_plan_to_create_new_user():
     delete_test_user_and_group()
     create_test_group()
     current_users = Users.from_passwd()
+    for u in current_users:
+        print(u.uid)
     provided_users = Users()
     public_keys = [PublicKey(
         b64encoded=PUBLIC_KEYS[0]['encoded'])]
