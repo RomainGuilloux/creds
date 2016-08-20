@@ -25,7 +25,15 @@ def create_plan(existing_users=None, proposed_users=None, purge_undefined=None, 
        list: Differences between discovered and proposed users with a
              list of operations that will achieve the desired state.
     """
+
     print('CREATING PLAN')
+    print('existing')
+    for u in existing_users:
+        print(u.uid, u.name)
+    print('proposed')
+    for u in proposed_users:
+        print(u.uid, u.name)
+
     plan = list()
     proposed_usernames = list()
 
