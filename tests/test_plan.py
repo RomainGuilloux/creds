@@ -222,5 +222,5 @@ def create_test_group():
             str('{0} {1} -g 59999 testuserx1234'.format(sudo_check(), LINUX_CMD_GROUP_ADD)))
     elif PLATFORM == 'FreeBSD':
         command = shlex.split(
-            str('{0} {1} groupadd -g 59999 testuserx1234'.format(sudo_check(), BSD_CMD_PW)))
+            str('{0} {1} groupadd -g 59999 -n testuserx1234'.format(sudo_check(), BSD_CMD_PW)))
     assert execute_command(command=command)
