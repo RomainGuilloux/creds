@@ -218,7 +218,6 @@ def generate_add_user_command(proposed_user=None):
     returns:
         list: The command string split into shell-like syntax
     """
-    PLATFORM = get_platform()
     if PLATFORM == 'Linux':
         command = '{0} {1}'.format(sudo_check(), LINUX_CMD_USERADD)
         if proposed_user.uid:
@@ -263,18 +262,19 @@ def generate_modify_user_command(task=None):
     """
     name = task['proposed_user'].name
     comparison_result = task['user_comparison']['result']
-    command = '{0} {1}'.format(sudo_check(), LINUX_CMD_USERMOD)
-    if comparison_result.get('replacement_uid_value'):
-        command = '{0} -u {1}'.format(command, comparison_result.get('replacement_uid_value'))
-    if comparison_result.get('replacement_gid_value'):
-        command = '{0} -g {1}'.format(command, comparison_result.get('replacement_gid_value'))
-    if comparison_result.get('replacement_gecos_value'):
-        command = '{0} -c {1}'.format(command, comparison_result.get('replacement_gecos_value'))
-    if comparison_result.get('replacement_shell_value'):
-        command = '{0} -s {1}'.format(command, comparison_result.get('replacement_shell_value'))
-    if comparison_result.get('replacement_home_dir_value'):
-        command = '{0} -d {1}'.format(command, comparison_result.get('replacement_home_dir_value'))
-    command = '{0} {1}'.format(command, name)
+    if PLATFORM == 'Linux':
+        command = '{0} {1}'.format(sudo_check(), LINUX_CMD_USERMOD)
+        if comparison_result.get('replacement_uid_value'):
+            command = '{0} -u {1}'.format(command, comparison_result.get('replacement_uid_value'))
+        if comparison_result.get('replacement_gid_value'):
+            command = '{0} -g {1}'.format(command, comparison_result.get('replacement_gid_value'))
+        if comparison_result.get('replacement_gecos_value'):
+            command = '{0} -c {1}'.format(command, comparison_result.get('replacement_gecos_value'))
+        if comparison_result.get('replacement_shell_value'):
+            command = '{0} -s {1}'.format(command, comparison_result.get('replacement_shell_value'))
+        if comparison_result.get('replacement_home_dir_value'):
+            command = '{0} -d {1}'.format(command, comparison_result.get('replacement_home_dir_value'))
+        command = '{0} {1}'.format(command, name)
     return shlex.split(str(command))
 
 
@@ -287,7 +287,8 @@ def generate_delete_user_command(username=None):
     returns:
         list: The user delete command string split into shell-like syntax
     """
-    command = '{0} {1} -r {2}'.format(sudo_check(), LINUX_CMD_USERDEL, username)
+    if PLATFORM == 'Linux':
+        command = '{0} {1} -r {2}'.format(sudo_check(), LINUX_CMD_USERDEL, username)
     return shlex.split(str(command))
 
 
