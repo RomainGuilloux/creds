@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """This module contains the classes for User (a user's details) and Users (a collection of User)."""
-from __future__ import (unicode_literals, print_function)
+from __future__ import unicode_literals
 
 import io
 import json

@@ -26,14 +26,6 @@ def create_plan(existing_users=None, proposed_users=None, purge_undefined=None, 
              list of operations that will achieve the desired state.
     """
 
-    print('CREATING PLAN')
-    print('existing')
-    for u in existing_users:
-        print(u.uid, u.name)
-    print('proposed')
-    for u in proposed_users:
-        print(u.uid, u.name)
-
     plan = list()
     proposed_usernames = list()
 
@@ -69,7 +61,6 @@ def create_plan(existing_users=None, proposed_users=None, purge_undefined=None, 
             if existing_user.name not in proposed_usernames:
                 if existing_user.name not in protected_users:
                     plan.append(dict(action='delete', username=existing_user.name, state='existing'))
-    print('END CREATE PLAN')
     return plan
 
 

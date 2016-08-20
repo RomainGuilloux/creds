@@ -33,8 +33,6 @@ def check_platform():
 
 
 def execute_command(command=None):
-    # print(command)
-    print(" ".join(command))
     """Execute a command and return the stdout and stderr."""
     process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     return process.communicate()
