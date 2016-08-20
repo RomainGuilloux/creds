@@ -9,7 +9,7 @@ from collections import MutableSequence
 
 from creds.constants import (UID_MAX, UID_MIN,
                              LINUX_CMD_USERADD, LINUX_CMD_USERDEL, LINUX_CMD_USERMOD,
-                             BSD_CMD_ADDUSER, BSD_CMD_CHPASS, BSD_CMD_RMUSER)
+                             BSD_CMD_PW)
 from creds.ssh import PublicKey
 from creds.ssh import read_authorized_keys
 from creds.utils import (get_platform, check_platform, sudo_check)

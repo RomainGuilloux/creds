@@ -8,8 +8,8 @@ from creds.plan import (create_plan, execute_plan)
 from creds.users import (Users, User)
 from creds.ssh import PublicKey
 from creds.utils import (execute_command, sudo_check, get_platform)
-from creds.constants import (LINUX_CMD_USERADD, LINUX_CMD_USERMOD, LINUX_CMD_USERDEL, LINUX_CMD_GROUP_ADD, LINUX_CMD_GROUP_DEL,
-                             BSD_CMD_ADDUSER, BSD_CMD_RMUSER, BSD_CMD_CHPASS, BSD_CMD_PW)
+from creds.constants import (LINUX_CMD_USERADD, LINUX_CMD_USERMOD, LINUX_CMD_USERDEL,
+                             LINUX_CMD_GROUP_ADD, LINUX_CMD_GROUP_DEL, BSD_CMD_PW)
 from external.six import text_type
 from .sample_data import PUBLIC_KEYS
 
@@ -212,7 +212,7 @@ def create_test_user():
             str('{0} {1} -u 59999 -c \"test user gecos\" -m  -s /bin/bash testuserx1234'.format(sudo_check(), LINUX_CMD_USERADD)))
     elif PLATFORM == 'FreeBSD':
         command = shlex.split(
-            str('{0} {1} -u 59999 -c \"test user gecos\" -m  -s /bin/bash testuserx1234'.format(sudo_check(), BSD_CMD_ADDUSER)))
+            str('{0} {1} useradd -u 59999 -c \"test user gecos\" -m  -s /bin/bash testuserx1234'.format(sudo_check(), BSD_CMD_PW)))
     assert execute_command(command=command)
 
 
