@@ -234,7 +234,7 @@ def generate_add_user_command(proposed_user=None):
             command = '{0} -s {1}'.format(command, proposed_user.shell)
         command = '{0} {1}'.format(command, proposed_user.name)
     elif PLATFORM == 'FreeBSD':
-        command = '{0} {1} useradd'.format(sudo_check(), BSD_CMD_PW)
+        command = '{0} -n {1} useradd'.format(sudo_check(), BSD_CMD_PW)
         if proposed_user.uid:
             command = '{0} -u {1}'.format(command, proposed_user.uid)
         if proposed_user.gid:
