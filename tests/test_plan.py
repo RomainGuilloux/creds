@@ -45,7 +45,7 @@ def test_create_and_execute_plan_to_create_new_user():
              gecos='test user gecos',
              public_keys=public_keys))
     plan = create_plan(existing_users=current_users, proposed_users=provided_users, purge_undefined=True,
-                       protected_users=['travis', 'couchdb', 'ubuntu'])
+                       protected_users=['travis', 'couchdb', 'ubuntu', 'vagrant'])
     assert plan[0]['state'] == 'missing'
     assert plan[0]['proposed_user'].name == "testuserx1234"
     assert plan[0]['proposed_user'].home_dir == "/home/testuserx1234"
@@ -59,7 +59,7 @@ def test_create_and_execute_plan_to_create_new_user():
 
     current_users = Users.from_passwd()
     plan = create_plan(existing_users=current_users, proposed_users=provided_users, purge_undefined=True,
-                       protected_users=['travis', 'couchdb', 'ubuntu', 'nginx', 'hadfielj'])
+                       protected_users=['travis', 'couchdb', 'ubuntu', 'nginx', 'hadfielj', 'vagrant'])
     assert not plan
     delete_test_user_and_group()
 
