@@ -61,6 +61,7 @@ def create_plan(existing_users=None, proposed_users=None, purge_undefined=None, 
             if existing_user.name not in proposed_usernames:
                 if existing_user.name not in protected_users:
                     plan.append(dict(action='delete', username=existing_user.name, state='existing'))
+    print('END CREATE PLAN')
     return plan
 
 
