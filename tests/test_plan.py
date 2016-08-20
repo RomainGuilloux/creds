@@ -232,7 +232,7 @@ def create_test_user():
             str('{0} {1} -u 59999 -c \"test user gecos\" -m  -s /bin/bash testuserx1234'.format(sudo_check(), LINUX_CMD_USERADD)))
     elif PLATFORM == 'FreeBSD':
         command = shlex.split(
-            str('{0} {1} useradd -u 59999 -c \"test user gecos\" -m  -s /bin/bash testuserx1234'.format(sudo_check(), BSD_CMD_PW)))
+            str('{0} {1} useradd -u 59999 -c \"test user gecos\" -m  -s /bin/bash -n testuserx1234'.format(sudo_check(), BSD_CMD_PW)))
     assert execute_command(command=command)
 
 
