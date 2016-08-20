@@ -33,7 +33,7 @@ def test_users_instance_creation():
     assert len(users) == 3
 
 
-def test_create_and_execute_plan_to_create_new_user()
+def test_create_and_execute_plan_to_create_new_user():
     print('IN THE TEST--------')
     delete_test_user_and_group()
     create_test_group()
