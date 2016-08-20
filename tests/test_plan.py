@@ -46,15 +46,8 @@ def test_create_and_execute_plan_to_create_new_user():
         User(name='testuserx1234', home_dir='/home/testuserx1234', shell='/bin/false', gid=59999, uid=59999,
              gecos='test user gecos',
              public_keys=public_keys))
-    print('PROVIDED 2')
-    for u in current_users:
-        print(u.uid, u.name)
-    print('END PROVIDED 2')
     plan = create_plan(existing_users=current_users, proposed_users=provided_users, purge_undefined=True,
                        protected_users=['travis', 'couchdb', 'ubuntu', 'vagrant'])
-    print()
-    for p in plan:
-        print(p)
     assert plan[0]['state'] == 'missing'
     assert plan[0]['proposed_user'].name == "testuserx1234"
     assert plan[0]['proposed_user'].home_dir == "/home/testuserx1234"
@@ -89,15 +82,6 @@ def test_create_and_execute_plan_to_create_identical_user():
 
 
 def test_update_existing_user():
-    print('IN THE TEST--------')
-    # print('CURRENT')
-    # for u in current_users:
-    #     print(u.uid, u.name)
-    # print('END CURRENT')
-    # print('PROVIDED')
-    # for u in current_users:
-    #     print(u.uid, u.name)
-    # print('END PROVIDED')
     delete_test_user_and_group()
     create_test_user()
     current_users = Users.from_passwd()
@@ -114,7 +98,6 @@ def test_update_existing_user():
     new_user = current_users.describe_users(users_filter=dict(name='testuserx1234'))
     assert new_user[0].public_keys[0].raw == raw_public_key
     delete_test_user_and_group()
-    print('END THE TEST--------')
 
 
 def test_execute_plan_to_create_new_user_with_clashing_uid():
