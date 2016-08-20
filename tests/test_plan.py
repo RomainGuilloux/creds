@@ -34,20 +34,12 @@ def test_users_instance_creation():
 
 
 def test_create_and_execute_plan_to_create_new_user():
-    print('IN THE TEST--------')
     delete_test_user_and_group()
     create_test_group()
     current_users = Users.from_passwd()
-    print('CURRENT')
-    for u in current_users:
-        print(u.uid, u.name)
-    print('END CURRENT')
 
     provided_users = Users()
-    print('PROVIDED')
-    for u in current_users:
-        print(u.uid, u.name)
-    print('END PROVIDED')
+
     public_keys = [PublicKey(
         b64encoded=PUBLIC_KEYS[0]['encoded'])]
     provided_users.append(
@@ -79,7 +71,6 @@ def test_create_and_execute_plan_to_create_new_user():
                        protected_users=['travis', 'couchdb', 'ubuntu', 'nginx', 'hadfielj', 'vagrant'])
     assert not plan
     delete_test_user_and_group()
-    print('END THE TEST--------')
 
 
 
@@ -98,6 +89,15 @@ def test_create_and_execute_plan_to_create_identical_user():
 
 
 def test_update_existing_user():
+    print('IN THE TEST--------')
+    # print('CURRENT')
+    # for u in current_users:
+    #     print(u.uid, u.name)
+    # print('END CURRENT')
+    # print('PROVIDED')
+    # for u in current_users:
+    #     print(u.uid, u.name)
+    # print('END PROVIDED')
     delete_test_user_and_group()
     create_test_user()
     current_users = Users.from_passwd()
@@ -114,6 +114,7 @@ def test_update_existing_user():
     new_user = current_users.describe_users(users_filter=dict(name='testuserx1234'))
     assert new_user[0].public_keys[0].raw == raw_public_key
     delete_test_user_and_group()
+    print('END THE TEST--------')
 
 
 def test_execute_plan_to_create_new_user_with_clashing_uid():
