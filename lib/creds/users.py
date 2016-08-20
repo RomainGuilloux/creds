@@ -289,6 +289,8 @@ def generate_delete_user_command(username=None):
     """
     if PLATFORM == 'Linux':
         command = '{0} {1} -r {2}'.format(sudo_check(), LINUX_CMD_USERDEL, username)
+    elif PLATFORM == 'FreeBSD':
+        command = '{0} {1} -y {2}'.format(sudo_check(), BSD_CMD_RMUSER, username)
     return shlex.split(str(command))
 
 
