@@ -192,12 +192,18 @@ def test_execute_plan_to_update_existing_user_with_multiple_keys():
 
 
 def delete_test_user_and_group():
-    del_user_command = shlex.split(str('{0} {1} -r -f testuserx1234'.format(sudo_check(), USERDEL)))
-    execute_command(command=del_user_command)
-    del_group_command = shlex.split(str('{0} {1} testuserx1234'.format(sudo_check(), GROUPDEL)))
-    execute_command(command=del_group_command)
-    del_user_ssh_dir_command = shlex.split(str('/bin/rm -rf /tmp/.ssh'))
-    execute_command(command=del_user_ssh_dir_command)
+    if PLATFORM == 'Linux':
+        del_user_command = shlex.split(str('{0} {1} -r -f testuserx1234'.format(sudo_check(), LINUX_CMD_USERDEL)))
+        execute_command(command=del_user_command)
+    elif PLATFORM == 'FreeBSD':
+        del_user_command = shlex.split(str('{0} {1} -y testuserx1234'.format(sudo_check(), BSD_CMD_RMUSER)))
+        execute_command(command=del_user_command)
+    if PLATFORM == 'Linux':
+        del_group_command = shlex.split(str('{0} {1} testuserx1234'.format(sudo_check(), GROUPDEL)))
+        execute_command(command=del_group_command)
+    if PLATFORM == 'Linux':
+        del_user_ssh_dir_command = shlex.split(str('/bin/rm -rf /tmp/.ssh'))
+        execute_command(command=del_user_ssh_dir_command)
 
 
 def create_test_user():
