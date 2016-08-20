@@ -53,6 +53,10 @@ def test_create_and_execute_plan_to_create_new_user():
         User(name='testuserx1234', home_dir='/home/testuserx1234', shell='/bin/false', gid=59999, uid=59999,
              gecos='test user gecos',
              public_keys=public_keys))
+    print('PROVIDED 2')
+    for u in current_users:
+        print(u.uid, u.name)
+    print('END PROVIDED 2')
     plan = create_plan(existing_users=current_users, proposed_users=provided_users, purge_undefined=True,
                        protected_users=['travis', 'couchdb', 'ubuntu', 'vagrant'])
     print()
