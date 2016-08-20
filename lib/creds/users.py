@@ -234,7 +234,7 @@ def generate_add_user_command(proposed_user=None):
             command = '{0} -s {1}'.format(command, proposed_user.shell)
         command = '{0} {1}'.format(command, proposed_user.name)
     elif PLATFORM == 'FreeBSD':
-        command = '{0} {1}'.format(sudo_check(), BSD_CMD_ADDUSER)
+        command = '{0} {1} useradd'.format(sudo_check(), BSD_CMD_PW)
         if proposed_user.uid:
             command = '{0} -u {1}'.format(command, proposed_user.uid)
         if proposed_user.gid:
@@ -290,7 +290,7 @@ def generate_delete_user_command(username=None):
     if PLATFORM == 'Linux':
         command = '{0} {1} -r {2}'.format(sudo_check(), LINUX_CMD_USERDEL, username)
     elif PLATFORM == 'FreeBSD':
-        command = '{0} {1} -y {2}'.format(sudo_check(), BSD_CMD_RMUSER, username)
+        command = '{0} {1} userdel -r {2}'.format(sudo_check(), BSD_CMD_PW, username)
     return shlex.split(str(command))
 
 
