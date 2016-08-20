@@ -2,10 +2,10 @@
 """Functions to define and discover OS constants."""
 from __future__ import (unicode_literals, print_function)
 
-import os
 import io
-
+import os
 from distutils import spawn
+
 from external.six import (text_type, PY2, PY3)
 
 SUPPORTED_PLATFORMS = ['Linux', 'FreeBSD']
@@ -16,9 +16,14 @@ DEFAULT_UID_MIN = 1000  # The lowest uid to consider safe to manage
 DEFAULT_UID_MAX = 60000  # The maximum uid to consider safe to manage
 
 CMD_SUDO = spawn.find_executable("sudo")
-CMD_USERADD = spawn.find_executable("useradd")
-CMD_USERMOD = spawn.find_executable("usermod")
-CMD_USERDEL = spawn.find_executable("userdel")
+
+LINUX_CMD_USERADD = spawn.find_executable("useradd")
+LINUX_CMD_USERMOD = spawn.find_executable("usermod")
+LINUX_CMD_USERDEL = spawn.find_executable("userdel")
+BSD_CMD_ADDUSER = spawn.find_executable("adduser")
+BSD_CMD_CHPASS = spawn.find_executable("chpass")
+BSD_CMD_RMUSER = spawn.find_executable("rmuser")
+
 
 def login_defs():
     """Discover the minimum and maximum UID number."""

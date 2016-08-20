@@ -7,12 +7,15 @@ import json
 import shlex
 from collections import MutableSequence
 
-from creds.constants import (UID_MAX, UID_MIN, CMD_USERMOD, CMD_USERDEL, CMD_USERADD)
+from creds.constants import (UID_MAX, UID_MIN,
+                             LINUX_CMD_USERADD, LINUX_CMD_USERDEL, LINUX_CMD_USERMOD,
+                             BSD_CMD_ADDUSER, BSD_CMD_CHPASS, BSD_CMD_RMUSER)
 from creds.ssh import PublicKey
 from creds.ssh import read_authorized_keys
-from creds.utils import (check_platform, sudo_check)
+from creds.utils import (get_platform, check_platform, sudo_check)
 from external.six import text_type
 
+PLATFORM = get_platform()
 
 class User(object):
 
@@ -215,20 +218,37 @@ def generate_add_user_command(proposed_user=None):
     returns:
         list: The command string split into shell-like syntax
     """
-    command = '{0} {1}'.format(sudo_check(), CMD_USERADD)
-    if proposed_user.uid:
-        command = '{0} -u {1}'.format(command, proposed_user.uid)
-    if proposed_user.gid:
-        command = '{0} -g {1}'.format(command, proposed_user.gid)
-    if proposed_user.gecos:
-        command = '{0} -c \'{1}\''.format(command, proposed_user.gecos)
-    if proposed_user.home_dir:
-        command = '{0} -d {1}'.format(command, proposed_user.home_dir)
-    else:
-        command = '{0} -m'.format(command)
-    if proposed_user.shell:
-        command = '{0} -s {1}'.format(command, proposed_user.shell)
-    command = '{0} {1}'.format(command, proposed_user.name)
+    PLATFORM = get_platform()
+    if PLATFORM == 'Linux':
+        command = '{0} {1}'.format(sudo_check(), LINUX_CMD_USERADD)
+        if proposed_user.uid:
+            command = '{0} -u {1}'.format(command, proposed_user.uid)
+        if proposed_user.gid:
+            command = '{0} -g {1}'.format(command, proposed_user.gid)
+        if proposed_user.gecos:
+            command = '{0} -c \'{1}\''.format(command, proposed_user.gecos)
+        if proposed_user.home_dir:
+            command = '{0} -d {1}'.format(command, proposed_user.home_dir)
+        else:
+            command = '{0} -m'.format(command)
+        if proposed_user.shell:
+            command = '{0} -s {1}'.format(command, proposed_user.shell)
+        command = '{0} {1}'.format(command, proposed_user.name)
+    elif PLATFORM == 'FreeBSD':
+        command = '{0} {1}'.format(sudo_check(), BSD_CMD_ADDUSER)
+        if proposed_user.uid:
+            command = '{0} -u {1}'.format(command, proposed_user.uid)
+        if proposed_user.gid:
+            command = '{0} -g {1}'.format(command, proposed_user.gid)
+        if proposed_user.gecos:
+            command = '{0} -c \'{1}\''.format(command, proposed_user.gecos)
+        if proposed_user.home_dir:
+            command = '{0} -d {1}'.format(command, proposed_user.home_dir)
+        else:
+            command = '{0} -m'.format(command)
+        if proposed_user.shell:
+            command = '{0} -s {1}'.format(command, proposed_user.shell)
+        command = '{0} {1}'.format(command, proposed_user.name)
     return shlex.split(str(command))
 
 
@@ -243,7 +263,7 @@ def generate_modify_user_command(task=None):
     """
     name = task['proposed_user'].name
     comparison_result = task['user_comparison']['result']
-    command = '{0} {1}'.format(sudo_check(), CMD_USERMOD)
+    command = '{0} {1}'.format(sudo_check(), LINUX_CMD_USERMOD)
     if comparison_result.get('replacement_uid_value'):
         command = '{0} -u {1}'.format(command, comparison_result.get('replacement_uid_value'))
     if comparison_result.get('replacement_gid_value'):
@@ -267,7 +287,7 @@ def generate_delete_user_command(username=None):
     returns:
         list: The user delete command string split into shell-like syntax
     """
-    command = '{0} {1} -r {2}'.format(sudo_check(), CMD_USERDEL, username)
+    command = '{0} {1} -r {2}'.format(sudo_check(), LINUX_CMD_USERDEL, username)
     return shlex.split(str(command))
 
 

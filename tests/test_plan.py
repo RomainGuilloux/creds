@@ -117,6 +117,7 @@ def test_execute_plan_to_create_new_user_with_clashing_uid():
 
 def test_execute_plan_to_update_existing_user():
     """ Create a new user and then attempt to create another user with existing id """
+    delete_test_user_and_group()
     create_test_user()
     raw_public_key_2 = PUBLIC_KEYS[1].get('raw')
     public_key_2 = PublicKey(raw=raw_public_key_2)
