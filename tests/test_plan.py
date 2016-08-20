@@ -220,4 +220,7 @@ def create_test_group():
     if PLATFORM == 'Linux':
         command = shlex.split(
             str('{0} {1} -g 59999 testuserx1234'.format(sudo_check(), GROUPADD)))
+    elif PLATFORM == 'FreeBSD':
+        command = shlex.split(
+            str('{0} {1} -g 59999 testuserx1234'.format(sudo_check(), GROUPADD)))
     assert execute_command(command=command)

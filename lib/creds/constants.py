@@ -17,12 +17,17 @@ DEFAULT_UID_MAX = 60000  # The maximum uid to consider safe to manage
 
 CMD_SUDO = spawn.find_executable("sudo")
 
+# LINUX COMMANDS
 LINUX_CMD_USERADD = spawn.find_executable("useradd")
 LINUX_CMD_USERMOD = spawn.find_executable("usermod")
 LINUX_CMD_USERDEL = spawn.find_executable("userdel")
+LINUX_CMD_GROUP_ADD = spawn.find_executable("groupadd")
+LINUX_CMD_GROUP_DEL = spawn.find_executable("groupdel")
+# BSD COMMANDS
 BSD_CMD_ADDUSER = spawn.find_executable("adduser")
 BSD_CMD_CHPASS = spawn.find_executable("chpass")
 BSD_CMD_RMUSER = spawn.find_executable("rmuser")
+BSD_CMD_PW = spawn.find_executable("pw")
 
 
 def login_defs():
