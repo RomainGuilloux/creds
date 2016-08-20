@@ -196,7 +196,7 @@ def delete_test_user_and_group():
         del_user_command = shlex.split(str('{0} {1} -r -f testuserx1234'.format(sudo_check(), LINUX_CMD_USERDEL)))
         execute_command(command=del_user_command)
     elif PLATFORM == 'FreeBSD':
-        del_user_command = shlex.split(str('{0} {1} -y testuserx1234'.format(sudo_check(), BSD_CMD_RMUSER)))
+        del_user_command = shlex.split(str('{0} {1} userdel -r testuserx1234'.format(sudo_check(), BSD_CMD_PW)))
         execute_command(command=del_user_command)
     if PLATFORM == 'Linux':
         del_group_command = shlex.split(str('{0} {1} testuserx1234'.format(sudo_check(), GROUPDEL)))
