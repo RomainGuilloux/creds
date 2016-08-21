@@ -11,13 +11,16 @@ from creds.users import (Users, User)
 from creds.utils import sudo_check
 from tests.sample_data import PUBLIC_KEYS
 from .sample_data import SAMPLE_DICT
+from hypothesis import given
+from hypothesis.strategies import text, integers
 
-
-def test_users_instance_creation():
+@given(text())
+def test_users_instance_creation(name):
     """ Test creation of instances of User and add to Users collection. """
     input_user_list = Users()
+    assert isinstance(name, int)
     input_user_list.append(
-        User(name='rod', uid=1001, gid=1001, gecos='rod comment', home_dir='/home/rod', shell='/bin/sh'))
+        User(name=name, uid=1001, gid=1001, gecos='rod comment', home_dir='/home/rod', shell='/bin/sh'))
     input_user_list.append(
         User(name='jane', uid=1002, gid=1002, gecos='jane comment', home_dir='/home/jane', shell='/bin/bash'))
     input_user_list.append(
