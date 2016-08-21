@@ -69,7 +69,7 @@ def test_create_and_execute_plan_to_create_new_user():
 
 def test_create_and_execute_plan_to_create_identical_user():
     delete_test_user_and_group()
-    # create_test_user()
+    create_test_user()
     current_users = Users.from_passwd()
     provided_users = Users()
     provided_users.append(User(name='testuserx1234', uid=59999, gecos='test user gecos'))
