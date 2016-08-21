@@ -24,7 +24,7 @@ def sudo_check():
 
 
 def get_platform():
-    """Return platform name"""
+    """Return platform name."""
     return platform.system()
 
 

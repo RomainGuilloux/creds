@@ -13,7 +13,6 @@ from external.six import iteritems
 def create_plan(existing_users=None, proposed_users=None, purge_undefined=None, protected_users=None,
                 allow_non_unique_id=None):
     """Determine what changes are required.
-
     args:
         existing_users (Users): List of discovered users
         proposed_users (Users): List of proposed users
