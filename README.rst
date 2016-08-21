@@ -1,7 +1,13 @@
-| |Documentation Status|
-| |Coverage Status|
-| |Travis Status|
-| |Code Health|
+.. image:: https://readthedocs.org/projects/creds/badge/?version=master
+    :target: http://creds.readthedocs.io/en/master/?badge=master
+    :alt: Documentation Status
+.. image:: https://coveralls.io/repos/github/jonhadfield/creds/badge.svg?branch=master
+    :target: https://coveralls.io/github/jonhadfield/creds?branch=master
+.. image:: https://travis-ci.org/jonhadfield/creds.svg?branch=master
+    :target: https://travis-ci.org/jonhadfield/creds
+.. image:: https://landscape.io/github/jonhadfield/creds/master/landscape.svg?style=flat
+   :target: https://landscape.io/github/jonhadfield/creds/master
+   :alt: Code Health
 
 Creds
 =====
@@ -70,11 +76,3 @@ ignore:
     plan = create_plan(existing_users=existing_users, proposed_users=proposed_users,
                        purge_undefined=True, protected_users=['rod', 'jane', 'freddy'])
 
-.. |Documentation Status| image:: https://readthedocs.org/projects/creds/badge/?version=master
-   :target: http://creds.readthedocs.io/en/master/?badge=master
-.. |Coverage Status| image:: https://coveralls.io/repos/github/jonhadfield/creds/badge.svg?branch=master&a=1
-   :target: https://coveralls.io/github/jonhadfield/creds?branch=master
-.. |Travis Status| image:: https://travis-ci.org/jonhadfield/creds.svg?branch=master
-   :target: https://travis-ci.org/jonhadfield/creds
-.. |Code Health| image:: https://landscape.io/github/jonhadfield/creds/master/landscape.svg?style=flat
-   :target: https://landscape.io/github/jonhadfield/creds/master
