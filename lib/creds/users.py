@@ -218,7 +218,7 @@ def generate_add_user_command(proposed_user=None):
     returns:
         list: The command string split into shell-like syntax
     """
-    if PLATFORM == ('Linux', 'OpenBSD'):
+    if PLATFORM in ('Linux', 'OpenBSD'):
         command = '{0} {1}'.format(sudo_check(), LINUX_CMD_USERADD)
         if proposed_user.uid:
             command = '{0} -u {1}'.format(command, proposed_user.uid)
