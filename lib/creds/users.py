@@ -228,7 +228,7 @@ class Users(MutableSequence):
         with io.open(filepath, mode='w') as export_file:
             if export_format == 'yaml':
                 import yaml
-                yaml.dump(self.to_dict(), export_file, default_flow_style=False)
+                yaml.safe_dump(self.to_dict(), export_file, default_flow_style=False)
         return True
 
 def generate_add_user_command(proposed_user=None):
